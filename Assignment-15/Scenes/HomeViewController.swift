@@ -7,11 +7,9 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
     // MARK: - Properties
-    private var movies = MovieInfo.nowOnCinema
-    
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Logo")
@@ -35,6 +33,7 @@ class HomeViewController: UIViewController {
         button.layer.shadowRadius = 16
         button.clipsToBounds = false
         button.layer.shadowOffset = CGSize(width: 0, height: 4)
+        button.contentEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         return button
     }()
     
@@ -55,6 +54,8 @@ class HomeViewController: UIViewController {
         collectionView.backgroundColor = .clear
         return collectionView
     }()
+    
+    private var movies = MovieInfo.nowOnCinema
     
     // MARK: - ViewLifeCycle
     override func viewDidLoad() {

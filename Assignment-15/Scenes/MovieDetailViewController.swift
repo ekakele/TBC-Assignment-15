@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieDetailViewController: UIViewController {
+final class MovieDetailViewController: UIViewController {
     // MARK: - Properties
     private let titleLabel: UILabel = {
         let label = UILabel()

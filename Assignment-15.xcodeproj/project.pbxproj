@@ -41,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B5010DC22AF7CD4800FB7476 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B5B1C83D2AF4F58500F8A988 /* Assets.xcassets */,
+				B5B1C83F2AF4F58500F8A988 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		B5B1C8282AF4F58400F8A988 = {
 			isa = PBXGroup;
 			children = (
@@ -63,8 +72,7 @@
 				B5B1C8482AF4F6E500F8A988 /* App */,
 				B5B1C8512AF5301D00F8A988 /* Model */,
 				B5B1C84B2AF4FFCC00F8A988 /* Scenes */,
-				B5B1C83D2AF4F58500F8A988 /* Assets.xcassets */,
-				B5B1C83F2AF4F58500F8A988 /* LaunchScreen.storyboard */,
+				B5010DC22AF7CD4800FB7476 /* Resources */,
 				B5B1C8422AF4F58500F8A988 /* Info.plist */,
 			);
 			path = "Assignment-15";
