@@ -14,7 +14,7 @@
 		B5B1C8412AF4F58500F8A988 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5B1C83F2AF4F58500F8A988 /* LaunchScreen.storyboard */; };
 		B5B1C84A2AF4F6F700F8A988 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B1C8492AF4F6F700F8A988 /* MovieDetailViewController.swift */; };
 		B5B1C84D2AF5170D00F8A988 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B1C84C2AF5170D00F8A988 /* MovieCollectionViewCell.swift */; };
-		B5B1C8502AF5300900F8A988 /* MovieInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B1C84F2AF5300900F8A988 /* MovieInfo.swift */; };
+		B5B1C8502AF5300900F8A988 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B1C84F2AF5300900F8A988 /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 		B5B1C8422AF4F58500F8A988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5B1C8492AF4F6F700F8A988 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		B5B1C84C2AF5170D00F8A988 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
-		B5B1C84F2AF5300900F8A988 /* MovieInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfo.swift; sourceTree = "<group>"; };
+		B5B1C84F2AF5300900F8A988 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +108,7 @@
 		B5B1C8512AF5301D00F8A988 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B5B1C84F2AF5300900F8A988 /* MovieInfo.swift */,
+				B5B1C84F2AF5300900F8A988 /* Movie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -188,7 +188,7 @@
 				B5B1C84D2AF5170D00F8A988 /* MovieCollectionViewCell.swift in Sources */,
 				B5B1C8352AF4F58400F8A988 /* AppDelegate.swift in Sources */,
 				B5B1C8372AF4F58400F8A988 /* SceneDelegate.swift in Sources */,
-				B5B1C8502AF5300900F8A988 /* MovieInfo.swift in Sources */,
+				B5B1C8502AF5300900F8A988 /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

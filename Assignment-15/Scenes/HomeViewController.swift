@@ -49,20 +49,21 @@ final class HomeViewController: UIViewController {
     private let moviesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .clear
         return collectionView
     }()
     
-    private var movies = MovieInfo.nowOnCinema
+    private var movies = Movie.nowOnCinema
     
     // MARK: - ViewLifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupBackground()
-        addSubviews()
+        setupSubviews()
         setupNavigationBar()
         setupLabelConstraints()
         setupCollectionView()
@@ -74,18 +75,18 @@ final class HomeViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
             customView: logoImageView
         )
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
             customView: profileButton
         )
     }
     
-    private func addSubviews() {
+    private func setupSubviews() {
         view.addSubview(titleLabel)
-        view.addSubview(moviesCollectionView)
+        setupCollectionView()
     }
     
     private func setupLabelConstraints() {
@@ -99,6 +100,8 @@ final class HomeViewController: UIViewController {
     }
     
     private func setupCollectionView() {
+        view.addSubview(moviesCollectionView)
+        
         moviesCollectionView.dataSource = self
         moviesCollectionView.delegate = self
         
@@ -125,12 +128,12 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let movie = movies[indexPath.row]
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath) as? MovieCollectionViewCell {
-            cell.configure(with: movie)
-            return cell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath) as? MovieCollectionViewCell else {
+            return UICollectionViewCell()
         }
-        return UICollectionViewCell()
+        
+        cell.configure(with: movies[indexPath.row])
+        return cell
     }
 }
 // MARK: - CollectionView Delegate
@@ -145,8 +148,10 @@ extension HomeViewController: UICollectionViewDelegate {
 // MARK: - CollectionView DelegateFlowLayout
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = (view.frame.width / 2) - 24
-        return CGSize(width: size, height: 278)
+        
+        let width = Int((view.frame.width / 2) - 24)
+        let height = 278
+        return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -154,7 +159,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
+        return 15
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

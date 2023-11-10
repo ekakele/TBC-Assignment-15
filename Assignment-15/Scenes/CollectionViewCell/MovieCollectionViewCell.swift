@@ -29,9 +29,9 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     }()
     
     private var addToFavoritesButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "heart"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = .red
         button.frame = CGRect(x: 10, y: 5, width: 20, height: 20)
         return button
     }()
@@ -49,7 +49,8 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.numberOfLines = 2
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textColor = .white
         return label
@@ -57,6 +58,7 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     
     private let genreLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .left
         label.font = .systemFont(ofSize: 14, weight: .light)
         label.textColor = .white
         return label
@@ -66,17 +68,12 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubviews()
-        setupCellStackViewConstraints()
-        setupFavoriteButton()
+        setupSubviews()
+        setupAddToFavoritesButtonAction()
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
+        super.init(coder: coder)
     }
     
     // MARK: - PrepareForReuse
@@ -91,15 +88,21 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Configure
-    func configure(with model: MovieInfo) {
-        movieImageView.image = model.image
-        ratingLabel.text = String(model.rating)
-        titleLabel.text = model.title
-        genreLabel.text = model.genre.rawValue
+    func configure(with movie: Movie) {
+        movieImageView.image = movie.image
+        ratingLabel.text = String(movie.rating)
+        titleLabel.text = movie.title
+        genreLabel.text = movie.genre.rawValue
     }
     
     // MARK: - Private Methods
-    private func addSubviews() {
+    private func setupSubviews() {
+        setupCellStackView()
+        setupMovieImageViewConstraints()
+        setupLabelsConstraints()
+    }
+    
+    private func setupCellStackView() {
         contentView.addSubview(cellStackView)
         
         cellStackView.addArrangedSubview(movieImageView)
@@ -108,31 +111,39 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         
         cellStackView.addSubview(ratingLabel)
         cellStackView.addSubview(addToFavoritesButton)
-    }
-    
-    private func setupCellStackViewConstraints() {
+        
         NSLayoutConstraint.activate([
+            // self = UITableViewCell
             cellStackView.topAnchor.constraint(equalTo: self.topAnchor),
             cellStackView.leftAnchor.constraint(equalTo: self.leftAnchor),
             cellStackView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            cellStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            
+            cellStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
+    }
+    
+    private func setupMovieImageViewConstraints() {
+        NSLayoutConstraint.activate([
             movieImageView.topAnchor.constraint(equalTo: cellStackView.topAnchor),
             movieImageView.leadingAnchor.constraint(equalTo: cellStackView.leadingAnchor),
             movieImageView.trailingAnchor.constraint(equalTo: cellStackView.trailingAnchor),
-            movieImageView.bottomAnchor.constraint(equalTo: cellStackView.bottomAnchor, constant: -48),
-            
+            movieImageView.bottomAnchor.constraint(equalTo: cellStackView.bottomAnchor, constant: -48)
+        ])
+    }
+    
+    private func setupLabelsConstraints() {
+        NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 8),
-            
             genreLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4)
         ])
     }
     
-    private func setupFavoriteButton() {
-        addToFavoritesButton.addTarget(self, action: #selector(likeBtnClicked), for: .touchUpInside)
+    private func setupAddToFavoritesButtonAction() {
+        addToFavoritesButton.addAction(UIAction(handler: { [weak self] _ in
+            self?.addToFavoritesButtonClicked()
+        }), for: .touchUpInside)
     }
     
-    @objc private func likeBtnClicked() {
+    private func addToFavoritesButtonClicked() {
         if self.isSelected == true {
             self.addToFavoritesButton.setImage(UIImage(systemName: "heart"), for: .normal)
             self.addToFavoritesButton.tintColor = .black
