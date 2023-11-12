@@ -182,7 +182,8 @@ final class MovieDetailViewController: UIViewController {
         createInfoStackView("Release", detail: movie.release)
         createInfoStackView("Genre", detail: movie.genre.rawValue)
         createInfoStackView("Director", detail: movie.director)
-        createInfoStackView("Cast", detail: movie.cast)    }
+        createInfoStackView("Cast", detail: movie.cast)
+    }
     
     // MARK: - Configure
     func configure(with movie: Movie) {
